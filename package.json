@@ -1,0 +1,19 @@
+{
+  "name": "yose-nodejs",
+  "version": "1.0.0",
+  "description": "NodeJS version of the Yose game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jona10/yose-nodejs.git"
+  },
+  "author": "Jonathan Falardeau",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/jona10/yose-nodejs/issues"
+  },
+  "homepage": "https://github.com/jona10/yose-nodejs#readme"
+}
