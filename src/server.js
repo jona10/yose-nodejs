@@ -5,50 +5,47 @@ const http = require('http')
 const debug = require('debug')
 const logger = require('morgan')
 
-let normalizePort = (val) => {
-  let port = parseInt(val, 10)
-
-  if (isNaN(port)) {
-    return val
+class Server {
+  constructor(port) {
+    this._port = port
+    this._server = null
   }
 
-  if (port >= 0) {
-    return port
-  }
-
-  return false
-}
-
-let onError = (error) => {
-  if (error.syscall !== 'listen') {
-    throw error
-  }
-
-  let bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges')
-      break
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use')
-      break
-    default:
+  _onError(error) {
+    if (error.syscall !== 'listen') {
       throw error
+    }
+
+    let bind = 'Port ' + this._port
+    switch (error.code) {
+      case 'EACCES':
+        console.error(bind + ' requires elevated privileges')
+        break
+      case 'EADDRINUSE':
+        console.error(bind + ' is already in use')
+        break
+      default:
+        throw error
+    }
+
+    process.exit(1)
   }
 
-  process.exit(1)
-}
+  _onListening() {
+    let address = this._server.address()
+    let bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + address.port
+    console.log('Listening on ' + bind)
+  }
 
-let onListening = () => {
-  let address = server.address()
-  let bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + address.port
-  console.log('Listening on ' + bind)
+  start() {
+    this._server = http.createServer(createYose(this._port, logger('dev')))
+    this._server.listen(this._port)
+    this._server.on('error', this._onError.bind(this))
+    this._server.on('listening', this._onListening.bind(this))
+  }
 }
 
 debug('src:server')
 
-let port = normalizePort(process.env.PORT || '3000')
-let server = http.createServer(createYose(port, logger('dev')))
-server.listen(port)
-server.on('error', onError)
-server.on('listening', onListening)
+let server = new Server(process.env.PORT || 3000)
+server.start()
