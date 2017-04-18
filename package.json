@@ -2,10 +2,14 @@
   "name": "yose-nodejs",
   "version": "1.0.0",
   "description": "NodeJS version of the Yose game",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node ./src/server.js",
     "test": "mocha test/**/*.test.js"
+  },
+  "engines": {
+    "node": "7.x",
+    "npm": "4.x"
   },
   "repository": {
     "type": "git",
