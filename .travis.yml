@@ -2,13 +2,11 @@ language: node_js
 node_js:
 - '7'
 env:
-  - CXX=g++-4.8
+  - CXX=g++
 addons:
   apt:
-    sources:
-      - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
+      - g++
 deploy:
   provider: heroku
   app: yose-nodejs
