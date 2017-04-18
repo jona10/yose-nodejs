@@ -1,12 +1,8 @@
+dist: precise
+sudo: false
 language: node_js
 node_js:
 - '7'
-env:
-  - CXX=g++
-addons:
-  apt:
-    packages:
-      - g++
 deploy:
   provider: heroku
   app: yose-nodejs
