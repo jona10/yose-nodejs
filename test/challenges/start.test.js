@@ -16,11 +16,15 @@ describe('The game', () => {
     server.stop()
   })
 
-  it('should serve a page greeting the user', () => {
-    return fetch('http://127.0.0.1:9000/').then(response => {
-      return response.body.read().toString()
-    }).then(body => {
+  it('should greet', () => {
+    return fetch('http://127.0.0.1:9000/').then(response => response.text()).then(body => {
       expect(body).to.contain('Hello Yose')
+    })
+  })
+
+  it('should be alive', () => {
+    return fetch('http://127.0.0.1:9000/ping').then(response => response.json()).then(json => {
+      expect(json).to.deep.equal({alive: true})
     })
   })
 })
