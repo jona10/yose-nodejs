@@ -27,4 +27,10 @@ describe('The game', () => {
       expect(json).to.deep.equal({alive: true})
     })
   })
+
+  it('should link to repository', () => {
+    return fetch('http://127.0.0.1:9000/').then(response => response.text()).then(body => {
+      expect(body).to.contain('<a href="https://github.com/jona10/yose-nodejs" target="_blank">Github</a>')
+    })
+  })
 })
