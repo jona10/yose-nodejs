@@ -1,1 +1,1 @@
-# yose-nodejs
+# YoseTheGame - NodeJS edition
