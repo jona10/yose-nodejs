@@ -58,11 +58,16 @@ class Yose {
     this._logger = logger
   }
 
+  address() {
+    let address = this._server.address()
+    return 'http://' + address.address + ':' + address.port
+  }
+
   start() {
     this._server = http.createServer(this._createApplication())
     this._server.on('listening', this._onListening.bind(this))
     this._server.on('close', this._onClose.bind(this))
-    this._server.listen(this._port)
+    this._server.listen(this._port, '127.0.0.1')
   }
 
   stop() {
