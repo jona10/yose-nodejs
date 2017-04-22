@@ -28,7 +28,7 @@ class Yose {
   }
 
   _onListening() {
-    this._logger.info('Yose sever listening on ' + this.address())
+    this._logger.info('Yose sever listening on port' + this.port())
   }
 
   _onClose() {
@@ -57,16 +57,15 @@ class Yose {
     this._logger = logger
   }
 
-  address() {
-    let address = this._server.address()
-    return 'http://' + address.address + ':' + address.port
+  port() {
+    return this._server.address().port
   }
 
-  start(port, hostname) {
+  start(port) {
     this._server = http.createServer(this._createApplication())
     this._server.on('listening', this._onListening.bind(this))
     this._server.on('close', this._onClose.bind(this))
-    this._server.listen(port, hostname)
+    this._server.listen(port)
   }
 
   stop() {

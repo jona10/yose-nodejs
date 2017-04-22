@@ -13,14 +13,14 @@ describe('The portfolio challenge', () => {
   let server
   let homePage = () => {
     return {
-      uri: server.address() + '/',
+      uri: 'http://127.0.0.1:' + server.port() + '/',
       transform: cheerio.load,
     }
   }
 
   before(() => {
     server = new Yose()
-    server.start(9000, '127.0.0.1')
+    server.start(9000)
   })
 
   after(() => {
