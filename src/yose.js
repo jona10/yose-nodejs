@@ -4,7 +4,6 @@ const express = require('express')
 const http = require('http')
 const path = require('path')
 const favicon = require('serve-favicon')
-const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const lessMiddleware = require('less-middleware')
 const routes = require('./routes')
@@ -14,17 +13,6 @@ class Yose {
   constructor() {
     this._server = null
     this._logger = loggers.off()
-  }
-
-  static _notFoundMiddleware(request, response, next) {
-    let error = new Error('Not Found')
-    error.status = 404
-    next(error)
-  }
-
-  static _unhandledErrorMiddleware(error, request, response) {
-    response.status(error.status || 500)
-    response.render('error')
   }
 
   _onListening() {
@@ -43,12 +31,9 @@ class Yose {
     application.use(require('morgan')('dev', {stream: this._logger.stream}))
     application.use(bodyParser.json())
     application.use(bodyParser.urlencoded({extended: false}))
-    application.use(cookieParser())
     application.use(lessMiddleware(path.join(__dirname, 'public')))
     application.use(express.static(path.join(__dirname, 'public')))
     application.use('/', routes.home)
-    application.use(Yose._notFoundMiddleware)
-    application.use(Yose._unhandledErrorMiddleware)
 
     return application
   }
