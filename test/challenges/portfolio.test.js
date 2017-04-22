@@ -17,4 +17,8 @@ describe('The portfolio challenge', () => {
   it('should share contact informations', () => {
     return yose.homePage().sharesContacts()
   })
+
+  it('should link to the ping challenge', () => {
+    return yose.homePage().linksToPing()
+  })
 })

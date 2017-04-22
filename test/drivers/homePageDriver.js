@@ -62,6 +62,16 @@ class HomePageDriver {
       expect(contact).to.have.text('Jonathan Falardeau')
     })
   }
+
+  linksToPing() {
+    return request(this._webPage('/')).then($ => {
+      let contact = $('a#ping-challenge-link')
+
+      expect(contact).to.exist
+      expect(contact).to.have.prop('href', '/ping')
+      expect(contact).to.have.text('Ping')
+    })
+  }
 }
 
 module.exports = HomePageDriver
