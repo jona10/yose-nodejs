@@ -9,7 +9,7 @@ const Yose = require('../../src/yose')
 const expect = chai.expect
 chai.use(chaiCheerio)
 
-describe('The game', () => {
+describe('The start challenge', () => {
   let server
   let homePage = () => {
     return {
