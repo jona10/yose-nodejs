@@ -15,5 +15,5 @@ class Server {
   }
 }
 
-let server = new Server(process.env.PORT || 3000)
-server.start()
+let server = new Server()
+server.start(process.env.PORT || 3000)

@@ -19,8 +19,8 @@ describe('The portfolio challenge', () => {
   }
 
   before(() => {
-    server = new Yose(9000)
-    server.start()
+    server = new Yose()
+    server.start(9000, '127.0.0.1')
   })
 
   after(() => {

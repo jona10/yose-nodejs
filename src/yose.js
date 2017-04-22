@@ -11,8 +11,7 @@ const routes = require('./routes')
 const loggers = require('./loggers')
 
 class Yose {
-  constructor(port) {
-    this._port = port
+  constructor() {
     this._server = null
     this._logger = loggers.off()
   }
@@ -29,7 +28,7 @@ class Yose {
   }
 
   _onListening() {
-    this._logger.info('Yose sever listening on port ' + this._port)
+    this._logger.info('Yose sever listening on ' + this.address())
   }
 
   _onClose() {
@@ -63,11 +62,11 @@ class Yose {
     return 'http://' + address.address + ':' + address.port
   }
 
-  start() {
+  start(port, hostname) {
     this._server = http.createServer(this._createApplication())
     this._server.on('listening', this._onListening.bind(this))
     this._server.on('close', this._onClose.bind(this))
-    this._server.listen(this._port, '127.0.0.1')
+    this._server.listen(port, hostname)
   }
 
   stop() {
