@@ -29,6 +29,7 @@ class Yose {
     application.use(bodyParser.urlencoded({extended: false}))
     application.use(lessMiddleware(path.join(__dirname, 'public')))
     application.use(express.static(path.join(__dirname, 'public')))
+    application.use('/vendors', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css')))
     application.use('/', routes.home)
 
     return application

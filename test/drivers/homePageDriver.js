@@ -29,7 +29,7 @@ class HomePageDriver {
 
   greets() {
     return request(this._webPage('/')).then($ => {
-      let greeting = $('h1')
+      let greeting = $('.page-header h3')
 
       expect(greeting).to.exist
       expect(greeting).to.have.text('Hello Yose')
@@ -59,7 +59,7 @@ class HomePageDriver {
 
       expect(contact).to.exist
       expect(contact).to.have.prop('href', 'mailto:jonathan.falardeau@gmail.com')
-      expect(contact).to.have.text('Jonathan Falardeau')
+      expect(contact).to.have.text('Contact')
     })
   }
 

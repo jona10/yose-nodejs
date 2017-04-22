@@ -24,6 +24,7 @@
   "homepage": "https://github.com/jona10/yose-nodejs#readme",
   "dependencies": {
     "body-parser": "~1.17.1",
+    "bootstrap": "^3.3.7",
     "express": "^4.15.2",
     "hbs": "~4.0.1",
     "less-middleware": "~2.2.0",
