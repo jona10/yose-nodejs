@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node ./src/server.js",
-    "test": "mocha test/**/*.test.js"
+    "test": "nyc --reporter=html --reporter=text mocha test/**/*.test.js",
+    "coverage": "nyc report --reporter=text-lcov mocha test/**/*.test.js | coveralls"
   },
   "engines": {
     "node": "7.x",
@@ -42,6 +43,7 @@
     "chai-as-promised": "^6.0.0",
     "chai-cheerio": "^1.0.0",
     "cheerio": "^0.22.0",
+    "coveralls": "^2.13.0",
     "eslint": "^3.19.0",
     "eslint-config-defaults": "^9.0.0",
     "eslint-config-standard": "^10.2.0",
@@ -50,7 +52,9 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^6.10.3",
     "eslint-plugin-standard": "^3.0.1",
+    "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
+    "nyc": "^10.2.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.0"
   }
