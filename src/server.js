@@ -3,16 +3,14 @@
 const Yose = require('./yose')
 const loggers = require('./loggers')
 
-class Server {
-  constructor() {
-    this._yose = new Yose()
-  }
-
-  start(port) {
-    this._yose.logOn(loggers.console())
-    this._yose.start(port)
-  }
+const shutdown = () => {
+  yose.stop()
+  process.exit(0)
 }
 
-let server = new Server()
-server.start(process.env.PORT || 3000)
+let yose = new Yose()
+yose.logOn(loggers.console())
+yose.start(process.env.PORT || 3000)
+
+process.on('SIGTERM', shutdown)
+process.on('SIGINT', shutdown)

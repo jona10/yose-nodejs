@@ -19,10 +19,6 @@ class Yose {
     this._logger.info('Yose server listening on port ' + this.port())
   }
 
-  _onClose() {
-    this._logger.info('Yose server is shutting down')
-  }
-
   _createApplication() {
     let application = express()
     application.set('views', path.join(__dirname, 'views'))
@@ -48,12 +44,11 @@ class Yose {
 
   start(port) {
     this._server = http.createServer(this._createApplication())
-    this._server.on('listening', this._onListening.bind(this))
-    this._server.on('close', this._onClose.bind(this))
-    this._server.listen(port)
+    this._server.listen(port, this._onListening.bind(this))
   }
 
   stop() {
+    this._logger.info('Yose server is shutting down')
     this._server.close()
   }
 }
