@@ -28,11 +28,11 @@ class Yose {
   }
 
   _onListening() {
-    this._logger.info('Yose sever listening on port' + this.port())
+    this._logger.info('Yose server listening on port ' + this.port())
   }
 
   _onClose() {
-    this._logger.info('Yose sever is shutting down')
+    this._logger.info('Yose server is shutting down')
   }
 
   _createApplication() {

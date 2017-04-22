@@ -4,14 +4,13 @@ const Yose = require('./yose')
 const loggers = require('./loggers')
 
 class Server {
-  constructor(port) {
-    this._port = port
-    this._yose = new Yose(port)
+  constructor() {
+    this._yose = new Yose()
   }
 
-  start() {
+  start(port) {
     this._yose.logOn(loggers.console())
-    this._yose.start()
+    this._yose.start(port)
   }
 }
 
