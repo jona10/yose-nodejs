@@ -1,62 +1,28 @@
 'use strict'
 
-const chai = require('chai')
-const cheerio = require('cheerio')
-const chaiCheerio = require('chai-cheerio')
-const request = require('request-promise')
-const Yose = require('../../src/yose')
-
-const expect = chai.expect
-chai.use(chaiCheerio)
+const YoseRunner = require('../drivers/yoseRunner')
 
 describe('The start challenge', () => {
-  let server
-  let homePage = () => {
-    return {
-      uri: 'http://127.0.0.1:' + server.port() + '/',
-      transform: cheerio.load,
-    }
-  }
-
-  let ping = () => {
-    return {
-      uri: 'http://127.0.0.1:' + server.port() + '/ping',
-      json: true,
-    }
-  }
+  let yose
 
   before(() => {
-    server = new Yose()
-    server.start(9000)
+    yose = new YoseRunner()
+    yose.run()
   })
 
   after(() => {
-    server.stop()
+    yose.stop()
   })
 
   it('should greet', () => {
-    return request(homePage()).then($ => {
-      let greeting = $('h1')
-
-      expect(greeting).to.exist
-      expect(greeting).to.have.text('Hello Yose')
-    })
+    return yose.homePage().greets()
   })
 
   it('should link to repository', () => {
-    return request(homePage()).then($ => {
-      let link = $('a#repository-link')
-
-      expect(link).to.exist
-      expect(link).to.have.prop('href', 'https://github.com/jona10/yose-nodejs')
-      expect(link).to.have.prop('target', '_blank')
-      expect(link).to.have.text('Github')
-    })
+    return yose.homePage().linksToRepository()
   })
 
   it('should be alive', () => {
-    return request(ping()).then(json => {
-      expect(json).to.deep.equal({alive: true})
-    })
+    return yose.homePage().isAlive()
   })
 })
