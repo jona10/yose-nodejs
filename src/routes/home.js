@@ -12,4 +12,8 @@ router.get('/ping', (request, response) => {
   response.json({alive: true})
 })
 
+router.get('/minesweeper', (request, response) => {
+  response.render('minesweeper')
+})
+
 module.exports = router

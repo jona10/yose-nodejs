@@ -1,7 +1,10 @@
 'use strict'
 
+const cheerio = require('cheerio')
+const request = require('request-promise')
 const Yose = require('../../src/yose')
 const HomePageDriver = require('./homePageDriver')
+const MinesweeperPageDriver = require('./minesweeperPageDriver')
 
 class YoseRunner {
   constructor() {
@@ -10,6 +13,13 @@ class YoseRunner {
 
   _address() {
     return 'http://127.0.0.1:' + this._server.port()
+  }
+
+  _webPage(path) {
+    return {
+      uri: this._address() + path,
+      transform: cheerio.load,
+    }
   }
 
   run() {
@@ -22,6 +32,10 @@ class YoseRunner {
 
   homePage() {
     return new HomePageDriver(this._address())
+  }
+
+  minesweeperPage() {
+    return request(this._webPage('/minesweeper')).then($ => new MinesweeperPageDriver($))
   }
 }
 
