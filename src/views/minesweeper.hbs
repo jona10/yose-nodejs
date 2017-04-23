@@ -1,12 +1,12 @@
 <div class="page-header">
     <h3 id="title">Minesweeper</h3>
 </div>
-<table>
+<table class="minesweeper">
     <tbody>
     {{#each grid.rows}}
         <tr>
         {{#each cells}}
-            <td id="cell-{{x}}x{{y}}" class="cell">&nbsp;</td>
+            <td id="cell-{{x}}x{{y}}" class="cell"></td>
         {{/each}}
         </tr>
     {{/each}}
