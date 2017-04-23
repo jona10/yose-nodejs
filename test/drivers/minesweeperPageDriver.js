@@ -21,7 +21,7 @@ class MinesweeperPageDriver {
     expect(cells.length).to.equal(height * width)
     for (let w = 1; w <= width; w += 1) {
       for (let h = 1; h <= height; h += 1) {
-        expect(cells).to.have.id('cell-' + h + 'x' + w)
+        expect(this._dom('#cell-' + w + 'x' + h)).to.exist
       }
     }
   }

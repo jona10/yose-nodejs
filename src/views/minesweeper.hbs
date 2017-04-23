@@ -1,0 +1,14 @@
+<div class="page-header">
+    <h3 id="title">Minesweeper</h3>
+</div>
+<table>
+    <tbody>
+    {{#each grid.rows}}
+        <tr>
+        {{#each cells}}
+            <td id="cell-{{x}}x{{y}}" class="cell">&nbsp;</td>
+        {{/each}}
+        </tr>
+    {{/each}}
+    </tbody>
+</table>

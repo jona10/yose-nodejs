@@ -2,7 +2,7 @@
 
 const YoseRunner = require('../drivers/yoseRunner')
 
-describe.skip('The minesweeper challenge', () => {
+describe('The minesweeper challenge', () => {
   let yose
 
   before(() => {

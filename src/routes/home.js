@@ -1,6 +1,7 @@
 'use strict'
 
 const express = require('express')
+const grid = require('./../minesweeper/grid')
 
 let router = express.Router()
 
@@ -13,7 +14,7 @@ router.get('/ping', (request, response) => {
 })
 
 router.get('/minesweeper', (request, response) => {
-  response.render('minesweeper')
+  response.render('minesweeper', {grid: grid(8, 8)})
 })
 
 module.exports = router
